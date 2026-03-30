@@ -1,15 +1,43 @@
-import { Shield } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
+  { label: "Simulation", href: "#simulation" },
+  { label: "SOC Ops", href: "#soc-ops" },
   { label: "Terminal", href: "#terminal" },
   { label: "Certs", href: "#certifications" },
+  { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
+
+function NavAvatar() {
+  return (
+    <a
+      href="#home"
+      className="nav-avatar-wrap flex items-center gap-2.5 group"
+      aria-label="Scroll to top"
+      data-ocid="nav.link"
+    >
+      {/* Avatar with animated neon ring */}
+      <div className="nav-avatar-ring relative w-8 h-8 sm:w-10 sm:h-10 shrink-0">
+        {/* Rotating + pulsing gradient ring */}
+        <div className="nav-avatar-ring-outer absolute inset-[-3px] rounded-full" />
+        {/* Inner image */}
+        <img
+          src="/assets/generated/sj-cyberpunk-logo.dim_600x600.png"
+          alt="SJ Logo"
+          loading="eager"
+          className="nav-avatar-img relative z-10 w-full h-full rounded-full object-cover object-center"
+        />
+      </div>
+      <span className="text-foreground/60 font-medium text-sm hidden sm:inline transition-colors duration-200 group-hover:text-foreground/90">
+        Sajin Joseph
+      </span>
+    </a>
+  );
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,28 +58,8 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Brand */}
-        <a
-          href="#home"
-          className="flex items-center gap-2"
-          data-ocid="nav.link"
-        >
-          <Shield
-            className="w-5 h-5"
-            style={{ color: "oklch(0.87 0.28 145)" }}
-          />
-          <span
-            className="font-mono font-bold text-lg"
-            style={{ color: "oklch(0.87 0.28 145)" }}
-          >
-            SJ
-          </span>
-          <span className="text-foreground/60 font-medium text-sm hidden sm:inline">
-            | Sajin Joseph
-          </span>
-        </a>
+        <NavAvatar />
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
           {NAV_LINKS.map((link) => (
             <a
@@ -65,7 +73,6 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Mobile hamburger */}
         <button
           type="button"
           className="md:hidden p-2 text-foreground/70 hover:text-neon transition-colors"
@@ -88,7 +95,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-[oklch(0.10_0.022_240/0.97)] border-t border-[oklch(0.22_0.04_240)] px-4 py-3 flex flex-col gap-3">
           {NAV_LINKS.map((link) => (
